@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Organizacional — Apple Inc.</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Hero / Inicio -->
+    <header>
+        <h1>
+            <img class="title-icon" src="resources/icon_apple.png" alt="Icono de Apple">
+            Apple Inc.
+        </h1>
+        <p>Análisis organizacional: entradas y salidas, partes interesadas, entorno PESTEL y procesos</p>
+    </header>
+
+    <!-- Navegación -->
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo"> Apple Insights</div>
+            <div class="nav-links">
+                <ul>
+                <li><a href="#entradas-salidas">Entradas y Salidas</a></li>
+                <li><a href="#partes-interesadas">Partes Interesadas</a></li>
+                <li><a href="#pestel">Diagrama PESTEL</a></li>
+                <li><a href="#procesos">Mapa de Procesos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- 1. Entradas y Salidas -->
+    <section id="entradas-salidas" class="section reveal">
+        <h2 class="section-title">Estudio de Entradas y Salidas</h2>
+        <p class="section-desc">Análisis detallado de los recursos que ingresan al sistema de Apple (materiales, talento, tecnología) y el valor que se entrega al mercado (productos, servicios, dividendos).</p>
+        
+        <!-- Reemplaza este div con tu etiqueta <img> cuando tengas la imagen -->
+        <div class="image-placeholder">
+            <img src="resources/Entradas-Salidas.png" alt="Diagrama de Entradas y Salidas">
+        </div>
+    </section>
+
+    <!-- 2. Partes Interesadas -->
+    <section id="partes-interesadas" class="section reveal">
+        <h2 class="section-title">Matriz de Partes Interesadas</h2>
+        <p class="section-desc">Mapeo del nivel de influencia e interés de los stakeholders clave: desde clientes y empleados hasta proveedores e inversores.</p>
+        
+        <div class="image-placeholder matrix-embed-container">
+            <iframe class="matrix-embed" src="matriz/matriz.html" title="Matriz digital de Partes Interesadas"></iframe>
+        </div>
+    </section>
+
+    <!-- 3. PESTEL -->
+    <section id="pestel" class="section reveal">
+        <h2 class="section-title">Diagrama PESTEL</h2>
+        <p class="section-desc">Impacto de los factores Políticos, Económicos, Socioculturales, Tecnológicos, Ecológicos y Legales en el ecosistema global de Apple.</p>
+        
+        <div class="image-placeholder">
+            <img src="resources/PESTEL_APPLE.png" alt="Diagrama PESTEL">
+        </div>
+    </section>
+
+    <!-- 4. Mapa de Procesos -->
+    <section id="procesos" class="section reveal">
+        <h2 class="section-title">Mapa de Procesos</h2>
+        <p class="section-desc">Visualización de los procesos estratégicos, misionales (I+D, ensamblaje, marketing, retail) y de apoyo que mantienen la maquinaria operativa.</p>
+        
+        <div class="image-placeholder">
+            <img src="resources/mapa_de_procesos_apple.png" alt="Mapa de Procesos">
+        </div>
+    </section>
+
+    <footer>
+        <p>Diseñado para fines académicos/informativos. No afiliado a Apple Inc.</p>
+    </footer>
+
+    <!-- Modal para ampliar imágenes -->
+    <div id="imageModal" class="modal" aria-hidden="true" role="dialog">
+        <span class="close-btn" aria-label="Cerrar vista ampliada">&times;</span>
+        <img class="modal-content" id="expandedImg" alt="Vista ampliada">
+    </div>
+
+    <!-- Script para las animaciones dinámicas al hacer scroll -->
+    <script src="script.js"></script>
+</body>
+</html>

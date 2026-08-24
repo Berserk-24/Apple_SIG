@@ -1,0 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 40px;
+    color: #222;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+.matrix-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.matrix-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+svg {
+    width: 800px;
+    max-width: 100%;
+}
+
+.point {
+    cursor: pointer;
+    transition: transform 1s;
+}
+
+.point:hover {
+    transform: scale(1.025);
+}
+
+.point:hover circle {
+    r: 24;
+}
+
+.point:hover text {
+    font-size: 22px;
+}
+
+.tooltip {
+    position: fixed;
+    display: none;
+
+    background: white;
+    color: #222;
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    border: 1px solid #ddd;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+    width: 230px;
+
+    pointer-events: none;
+
+    z-index: 1000;
+}
+
+
+.legend-panel h2 {
+    margin: 0 0 12px;
+}
+
+.legend {
+    margin-top: 0;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.legend-item {
+    padding: 10px;
+    border-radius: 6px;
+    background: #f0f0f0;
+}
+
+.legend-item strong {
+    margin-right: 5px;
+}
+
+@media (max-width: 760px) {
+    .matrix-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .legend {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .legend {
+        grid-template-columns: 1fr;
+    }
+}
