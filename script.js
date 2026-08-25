@@ -46,6 +46,7 @@
         }
 
         var navLinks = document.querySelectorAll('nav a[href^="#"]');
+
         for (var j = 0; j < navLinks.length; j++) {
             navLinks[j].addEventListener("click", function (event) {
                 var href = this.getAttribute("href");
@@ -74,6 +75,22 @@
         var modalImg = document.getElementById("expandedImg");
         var closeBtn = document.querySelector(".close-btn");
         var images = document.querySelectorAll(".image-placeholder img");
+        var infografiaTab = document.getElementById("abrirInfografia");
+
+        function openModalWithImage(src, altText) {
+            if (!modal || !modalImg) {
+                return;
+            }
+
+            modal.style.display = "flex";
+            modal.setAttribute("aria-hidden", "false");
+            modalImg.src = src;
+            modalImg.alt = altText || "Vista ampliada";
+            document.body.style.overflow = "hidden";
+            requestAnimationFrame(function () {
+                modal.classList.add("show");
+            });
+        }
 
         function closeModal() {
             if (!modal) {
@@ -90,18 +107,13 @@
 
         for (var k = 0; k < images.length; k++) {
             images[k].addEventListener("click", function () {
-                if (!modal || !modalImg) {
-                    return;
-                }
+                openModalWithImage(this.src, this.alt || "Vista ampliada");
+            });
+        }
 
-                modal.style.display = "flex";
-                modal.setAttribute("aria-hidden", "false");
-                modalImg.src = this.src;
-                modalImg.alt = this.alt || "Vista ampliada";
-                document.body.style.overflow = "hidden";
-                requestAnimationFrame(function () {
-                    modal.classList.add("show");
-                });
+        if (infografiaTab) {
+            infografiaTab.addEventListener("click", function () {
+                openModalWithImage("resources/infografia.png", "Infografia de Apple");
             });
         }
 

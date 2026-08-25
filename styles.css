@@ -52,6 +52,7 @@
         header,
         nav,
         .section,
+        .policy-section,
         footer {
             position: relative;
             z-index: 1;
@@ -59,7 +60,7 @@
 
         /* --- NAVEGACIÓN --- */
         nav {
-            background-color: rgba(192, 192, 192, 0.95);
+            background-color: transparent;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -67,8 +68,22 @@
             -webkit-backdrop-filter: blur(0.1px);
             width: 100%;
             padding: 15px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+            overflow: visible;
+            isolation: isolate;
         }
+
+        nav::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: rgba(192, 192, 192, 0.95);
+            backdrop-filter: blur(0.1px);
+            -webkit-backdrop-filter: blur(0.1px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+            z-index: 2;
+            pointer-events: none;
+        }
+
         nav ul {
             display: flex;
             justify-content: center;
@@ -78,12 +93,14 @@
             padding: 12px;
         }
         .nav-container {
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
+            position: relative;
+            z-index: 3;
         }
 
         .nav-logo {
@@ -103,6 +120,55 @@
 
         .nav-links a:hover {
             color: var(--text-muted);
+        }
+
+        .nav-tab-container {
+            position: absolute;
+            top: 100%;
+            right: clamp(20px, 5vw, 58px);
+            z-index: -1;
+        }
+
+        .vineta-tab {
+            background-color: rgba(173, 138, 31, 0.95);
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.13);
+            border-top: none;
+            backdrop-filter: blur(0.1px);
+            -webkit-backdrop-filter: blur(0.1px);
+            border-radius: 0 0 12px 12px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease, color 0.3s ease;
+            transform: translateY(-68%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vineta-tab::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 62%;
+            background: linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.38) 0%,
+                rgba(255, 255, 255, 0.14) 48%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            pointer-events: none;
+        }
+
+        .vineta-tab:hover,
+        .vineta-tab:focus-visible {
+            transform: translateY(0);
+            color: var(--text-main);
         }
 
         header {
@@ -347,6 +413,35 @@
             transform: translateY(0);
         }
 
+        /* --- SECCION DE POLITICA --- */
+        .policy-section {
+            background-color: #000;
+            color: #fff;
+            padding: 80px 20px;
+            margin-top: 40px;
+        }
+
+        .policy-content {
+            max-width: 980px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .policy-content h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 22px;
+        }
+
+        .policy-content p {
+            color: #d2d2d7;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
         /* --- FOOTER --- */
         footer {
             background-color: var(--card-bg);
@@ -377,11 +472,29 @@
                 width: 140px;
                 opacity: 1.2;
             }
+
+            .nav-tab-container {
+                right: 14px;
+            }
+
+            .vineta-tab {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
         }
 
         @media (max-width: 700px) {
             header::before,
             header::after {
                 display: none;
+            }
+
+            .policy-content h2 {
+                font-size: 1.7rem;
+            }
+
+            .policy-content p {
+                font-size: 0.98rem;
+                line-height: 1.8;
             }
         }
