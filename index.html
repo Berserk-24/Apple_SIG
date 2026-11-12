@@ -20,17 +20,46 @@
 
     <!-- Navegación -->
 
-    <nav>
+    <nav class="spa-nav" aria-label="Navegación del proyecto">
         <div class="nav-container">
-            <div class="nav-logo"> Apple Insights</div>
-            <div class="nav-links">
-                <ul>
-                <li><a href="#entradas-salidas">Entradas y Salidas</a></li>
-                <li><a href="#partes-interesadas">Partes Interesadas</a></li>
-                <li><a href="#matriz-raci">Matriz RACI</a></li>
-                <li><a href="#pestel">Diagrama PESTEL</a></li>
-                <li><a href="#procesos">Mapa de Procesos</a></li>
-                </ul>
+            <div class="nav-viewport">
+                <div class="cut-picker" id="cutPicker" hidden>
+                    <button class="cut-arrow is-current" type="button" data-cut="1" aria-controls="cut-content-1">
+                        <span class="cut-arrow-number">01</span>
+                        <span class="cut-arrow-title">Corte 1</span>
+                        <span class="cut-arrow-subtitle">Contexto organizacional</span>
+                        <span class="cut-arrow-icon" aria-hidden="true">›</span>
+                    </button>
+                    <button class="cut-arrow" type="button" data-cut="2" aria-controls="cut-content-2">
+                        <span class="cut-arrow-number"> &nbsp; 02</span>
+                        <span class="cut-arrow-title"> &nbsp; Corte 2</span>
+                        <span class="cut-arrow-subtitle"> &nbsp; Impactos, activos y riesgos</span>
+                        <span class="cut-arrow-icon" aria-hidden="true">›</span>
+                    </button>
+                    <button class="cut-arrow" type="button" data-cut="3" aria-controls="cut-content-3">
+                        <span class="cut-arrow-number"> &nbsp; 03</span>
+                        <span class="cut-arrow-title"> &nbsp; Corte 3</span>
+                        <span class="cut-arrow-subtitle"> &nbsp; Evaluación y mejora</span>
+                        <span class="cut-arrow-icon" aria-hidden="true">›</span>
+                    </button>
+                </div>
+
+                <div class="inner-nav" id="innerNav">
+                    <div class="inner-nav-head">
+                        <button class="back-button" id="showCutPicker" type="button" aria-expanded="false" aria-controls="cutPicker">
+                            <span aria-hidden="true">←</span>
+                            <span>Todos los cortes</span>
+                        </button>
+                        <div class="current-cut">
+                            <span class="current-cut-dot" aria-hidden="true"></span>
+                            <span id="currentCutLabel">Corte 1</span>
+                        </div>
+                        <button class="next-cut-icon" id="nextCut" type="button" aria-label="Siguiente corte" title="Siguiente corte">
+                            <span aria-hidden="true">→</span>
+                        </button>
+                    </div>
+                    <div class="inner-nav-items" id="innerNavItems" aria-label="Secciones del corte"></div>
+                </div>
             </div>
         </div>
         <div class="nav-tab-container">
@@ -41,6 +70,7 @@
     </nav>
 
 
+    <div id="cut-content-1" class="cut-content" data-cut-content="1">
     <!-- 1. Entradas y Salidas -->
     <section id="entradas-salidas" class="section reveal">
         <h2 class="section-title">Estudio de Entradas y Salidas</h2>
@@ -100,6 +130,65 @@
                 Apple orienta su gestión hacia la protección del medio ambiente, la salud y la seguridad. Busca cumplir y superar las normas legales ambientales y de seguridad aplicables. También promueve la mejora continua de sus procesos y su desempeño ambiental. La empresa trabaja en la reducción de sus emisiones de gases de efecto invernadero. Mediante su estrategia Apple 2030, busca disminuir significativamente su huella de carbono. Además, fomenta el uso de energías renovables en sus operaciones y proveedores. Apple impulsa el uso de materiales reciclados y responsables en sus productos. También desarrolla acciones para reducir residuos, consumo de agua y contaminación. Exige a sus proveedores prácticas responsables en materia laboral, ambiental y de seguridad. Finalmente, integra la sostenibilidad en el diseño, fabricación y ciclo de vida de sus productos.
             </p>
         </div>
+    </section>
+    </div>
+
+    <div id="cut-content-2" class="cut-content" data-cut-content="2" hidden>
+        <section id="aspectos-impactos" class="section reveal">
+            <h2 class="section-title">Aspectos e impactos ambientales</h2>
+            <p class="section-desc">Matriz de aspectos e impactos ambientales asociada a los productos y actividades de Apple.</p>
+            <div class="image-placeholder document-placeholder">
+                <iframe
+                    class="document-embed"
+                    src="resources/Matriz_Aspectos_Impactos_Ambientales_iPhone%2520(1).pdf"
+                    title="Matriz de aspectos e impactos ambientales"
+                    loading="lazy"
+                ></iframe>
+            </div>
+            <p class="document-link"><a href="resources/Matriz_Aspectos_Impactos_Ambientales_iPhone%2520(1).pdf" target="_blank" rel="noopener">Abrir el PDF en una pestaña nueva</a></p>
+        </section>
+
+        <section id="amenazas-activos" class="section reveal">
+            <h2 class="section-title">Amenazas y activos</h2>
+            <ul class="threat-list">
+                <li><strong>Diseños de hardware no lanzados (ej. esquemáticos de MacBook/iPhone)</strong><span>Amenaza: ransomware a proveedores de manufactura (caso Quanta/REvil, 2021).</span></li>
+                <li><strong>Código fuente de iOS/macOS</strong><span>Amenaza: filtración interna o robo por parte de colaboradores o contratistas.</span></li>
+                <li><strong>Datos personales de usuarios en iCloud</strong><span>Amenaza: phishing y ataques de fuerza bruta a cuentas (caso Celebgate, 2014).</span></li>
+                <li><strong>Infraestructura de manufactura concentrada (Foxconn, Zhengzhou)</strong><span>Amenaza: disrupciones geopolíticas o sanitarias (caso confinamiento COVID, 2022).</span></li>
+                <li><strong>Marca y hoja de ruta de productos</strong><span>Amenaza: filtraciones a prensa o leaks de productos antes del lanzamiento.</span></li>
+            </ul>
+        </section>
+
+        <section id="riesgos-calidad" class="section reveal">
+            <h2 class="section-title">Riesgos de calidad en los procesos</h2>
+            <ol class="risk-list">
+                <li><strong>Defectos de diseño no detectados antes del lanzamiento</strong><span>Fallas de hardware o software que llegan a producción masiva.</span></li>
+                <li><strong>Variabilidad o defectos en la manufactura de proveedores externos</strong><span>Inconsistencias de calidad en la línea de ensamblaje.</span></li>
+                <li><strong>Retrasos o errores en la resolución de soporte técnico (AppleCare)</strong><span>Tiempos de respuesta o diagnósticos deficientes.</span></li>
+                <li><strong>Software lanzado con errores críticos por presión de tiempos comerciales</strong><span>Actualizaciones de iOS con bugs de alto impacto.</span></li>
+                <li><strong>No conformidades regulatorias o de certificación</strong><span>Retrasos de ingreso a mercados por incumplimiento normativo.</span></li>
+            </ol>
+            <div class="image-placeholder risk-table">
+                <img src="resources/vpirRCP.png" alt="Tabla VPIR de riesgos de calidad en los procesos" loading="lazy">
+            </div>
+        </section>
+
+        <section id="riesgos-seguridad" class="section reveal">
+            <h2 class="section-title">Riesgos de seguridad de la información</h2>
+            <ol class="risk-list">
+                <li><strong>Filtración de datos personales de usuarios</strong><span>Exposición de información de cuentas de iCloud u otros servicios.</span></li>
+                <li><strong>Compromiso de la cadena de suministro de software</strong><span>Dependencias o SDKs de terceros comprometidos en una app o actualización.</span></li>
+                <li><strong>Robo o filtración de propiedad intelectual</strong><span>Diseños de producto o código fuente sustraídos antes del lanzamiento.</span></li>
+                <li><strong>Ingeniería social o phishing dirigido a empleados</strong><span>Acceso no autorizado a sistemas internos mediante engaño.</span></li>
+            </ol>
+            <div class="image-placeholder risk-table">
+                <img src="resources/vpirSI.png" alt="Tabla VPIR de riesgos de seguridad de la información" loading="lazy">
+            </div>
+        </section>
+    </div>
+    <section class="cut-empty-state" data-cut-content="3" hidden aria-live="polite">
+        <h2>Corte 3 · Evaluación y mejora</h2>
+        <p>Este corte todavía no tiene contenido en esta página.</p>
     </section>
 
     <footer>

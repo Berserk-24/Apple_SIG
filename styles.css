@@ -442,6 +442,368 @@
             margin: 0 auto;
         }
 
+        .threat-list,
+        .risk-list {
+            display: grid;
+            max-width: 860px;
+            gap: 12px;
+            margin: 0 auto 32px;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .threat-list {
+            padding: 0;
+            list-style: none;
+        }
+
+        .threat-list li,
+        .risk-list li {
+            padding: 16px 20px;
+            border-left: 4px solid rgba(173, 138, 31, 0.8);
+            border-radius: 8px;
+            background: var(--card-bg);
+        }
+
+        .threat-list strong,
+        .threat-list span,
+        .risk-list strong,
+        .risk-list li span {
+            display: block;
+        }
+
+        .threat-list span,
+        .risk-list li span {
+            margin-top: 4px;
+            color: var(--text-muted);
+        }
+
+        .risk-list {
+            padding-left: 2rem;
+        }
+
+        .risk-list li {
+            padding-left: 18px;
+        }
+
+        .risk-list li::marker {
+            color: #8a6c1d;
+            font-weight: 700;
+        }
+
+        .document-placeholder,
+        .risk-table {
+            height: auto;
+            min-height: 0;
+            padding: 8px;
+        }
+
+        .document-embed {
+            display: block;
+            width: 100%;
+            height: min(75vh, 760px);
+            min-height: 560px;
+            border: 0;
+            border-radius: 18px;
+            background: #fff;
+        }
+
+        .document-link {
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .document-link a {
+            color: #725814;
+        }
+
+        .risk-table img {
+            height: auto;
+            object-fit: contain;
+        }
+
+        .cut-empty-state {
+            min-height: 255px;
+            margin: 40px auto;
+            padding: 64px 24px;
+            max-width: 900px;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            background: var(--card-bg);
+            text-align: center;
+        }
+
+        .cut-empty-state h2 {
+            margin-bottom: 12px;
+        }
+
+        .cut-empty-state p {
+            color: var(--text-muted);
+        }
+
+        /* --- NAVEGACION SPA --- */
+        [hidden] {
+            display: none !important;
+        }
+
+        nav.spa-nav {
+            padding: 0;
+        }
+
+        .spa-nav .nav-container {
+            display: block;
+            width: min(1160px, calc(100% - 48px));
+            max-width: none;
+            padding: 0 0 8px;
+        }
+
+        .inner-nav-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .nav-caption,
+        .nav-hint,
+        .cut-arrow-number,
+        .nav-item-count {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .nav-hint {
+            color: #62636a;
+            font-size: 11px;
+        }
+
+        .nav-viewport {
+            min-height: 104px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .cut-picker {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            padding: 8px 0;
+        }
+
+        .cut-arrow {
+            --tip: 25px;
+            position: relative;
+            isolation: isolate;
+            display: flex;
+            min-width: 0;
+            min-height: 88px;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 12px 40px 12px 25px;
+            border: 0;
+            background: transparent;
+            color: #f0efeb;
+            text-align: left;
+            cursor: pointer;
+            clip-path: polygon(0 0, calc(100% - var(--tip)) 0, 100% 50%, calc(100% - var(--tip)) 100%, 0 100%, var(--tip) 50%);
+            transition: filter 0.22s, transform 0.22s;
+        }
+
+        .cut-arrow::before,
+        .cut-arrow::after {
+            position: absolute;
+            inset: 0;
+            content: "";
+            clip-path: polygon(0 0, calc(100% - var(--tip)) 0, 100% 50%, calc(100% - var(--tip)) 100%, 0 100%, var(--tip) 50%);
+        }
+
+        .cut-arrow::before {
+            z-index: -2;
+            background: #77787d;
+        }
+
+        .cut-arrow::after {
+            inset: 1px;
+            z-index: -1;
+            background: linear-gradient(145deg, #77787d, #58595e);
+        }
+
+        .cut-arrow:first-child {
+            padding-left: 18px;
+            clip-path: polygon(0 0, calc(100% - var(--tip)) 0, 100% 50%, calc(100% - var(--tip)) 100%, 0 100%);
+        }
+
+        .cut-arrow:first-child::before,
+        .cut-arrow:first-child::after {
+            clip-path: polygon(0 0, calc(100% - var(--tip)) 0, 100% 50%, calc(100% - var(--tip)) 100%, 0 100%);
+        }
+
+        .cut-arrow:hover {
+            filter: brightness(1.12);
+            transform: translateY(-2px);
+        }
+
+        .cut-arrow.is-current::before {
+            background: rgba(120, 91, 20, 0.95);
+        }
+
+        .cut-arrow.is-current::after {
+            background: linear-gradient(145deg, #77705e, #58554e);
+        }
+
+        .cut-arrow-number {
+            margin-bottom: 4px;
+            color: #e3c66e;
+        }
+
+        .cut-arrow-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .cut-arrow-subtitle {
+            margin-top: 2px;
+            color: #d0d0d2;
+            font-size: 11px;
+        }
+
+        .cut-arrow-icon {
+            position: absolute;
+            top: 50%;
+            right: 17px;
+            transform: translateY(-50%);
+            color: #dedee0;
+            font-size: 21px;
+        }
+
+        .inner-nav {
+            display: flex;
+            min-height: 96px;
+            flex-direction: column;
+            padding: 7px 0 2px;
+        }
+
+        .inner-nav-head {
+            min-height: 24px;
+        }
+
+        .back-button,
+        .next-cut-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 4px 0;
+            border: 0;
+            background: transparent;
+            color: #55565c;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .next-cut-icon {
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            border-radius: 50%;
+            font-size: 17px;
+        }
+
+        .back-button:hover,
+        .next-cut-icon:hover {
+            color: #8a6c1d;
+        }
+
+        .current-cut {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .current-cut-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ad8a1f;
+        }
+
+        .inner-nav-items {
+            display: flex;
+            min-width: 0;
+            flex: 1;
+            align-items: stretch;
+            gap: 4px;
+            overflow-x: auto;
+            padding: 7px 0;
+            scrollbar-width: thin;
+        }
+
+        .nav-item {
+            position: relative;
+            display: inline-flex;
+            flex: 0 0 auto;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 11px;
+            border: 1px solid transparent;
+            border-radius: 7px;
+            color: #53545a;
+            font-size: 12px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.38);
+        }
+
+        .nav-item.active {
+            border-color: rgba(120, 91, 20, 0.2);
+            background: rgba(255, 255, 255, 0.55);
+            color: #4a3b16;
+        }
+
+        .nav-item-count {
+            color: #8a6c1d;
+            font-size: 9px;
+        }
+
+        .cut-panel-enter {
+            animation: cut-panel-enter 0.36s ease both;
+        }
+
+        @keyframes cut-panel-enter {
+            from {
+                opacity: 0;
+                transform: translateX(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .cut-content.cut-panel-enter,
+        .cut-empty-state.cut-panel-enter {
+            animation-name: cut-content-enter;
+        }
+
+        @keyframes cut-content-enter {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* --- FOOTER --- */
         footer {
             background-color: var(--card-bg);
@@ -496,5 +858,54 @@
             .policy-content p {
                 font-size: 0.98rem;
                 line-height: 1.8;
+            }
+
+            .spa-nav .nav-container {
+                width: calc(100% - 28px);
+            }
+
+            .cut-picker {
+                grid-template-columns: 1fr;
+                gap: 7px;
+            }
+
+            .cut-arrow {
+                min-height: 68px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+
+            .nav-viewport {
+                min-height: 90px;
+            }
+
+            .inner-nav-items {
+                margin-right: -4px;
+            }
+
+            .document-embed {
+                height: 65vh;
+                min-height: 420px;
+            }
+
+            .cut-empty-state {
+                margin: 28px 14px;
+                padding: 48px 18px;
+            }
+
+            .threat-list li,
+            .risk-list li {
+                padding: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cut-arrow,
+            .nav-item {
+                transition-duration: 0.01ms;
+            }
+
+            .cut-panel-enter {
+                animation-duration: 0.01ms;
             }
         }
