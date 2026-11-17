@@ -39,7 +39,14 @@
             },
             3: {
                 title: "Corte 3",
-                sections: []
+                sections: [
+                    { id: "competencias-altos-mandos", label: "Competencias directivas" },
+                    { id: "sgsst-phva", label: "SGSST · ciclo PHVA" },
+                    { id: "seguimiento-medicion", label: "Seguimiento y medición" },
+                    { id: "emergencias-desastres", label: "Emergencias naturales" },
+                    { id: "control-operacional", label: "Control operacional" },
+                    { id: "controles-emergencia-proceso", label: "Controles de emergencia por proceso" }
+                ]
             }
         };
         var activeCut = 1;
@@ -300,3 +307,357 @@
                 closeModal();
             }
         });
+
+        var sgsstMonths = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        var sgsstMetrics = [
+            {
+                name: "Frecuencia de accidentalidad",
+                target: 0.5,
+                comparator: "≤",
+                values: [1.2, 1.1, 1.2, 1.0, 0.9, 0.8, 0.7, 0.6, 0.6, 0.5, 0.4, 0.4],
+                periods: sgsstMonths,
+                frequency: "Mensual",
+                direction: "max",
+                color: "#5B21B6"
+            },
+            {
+                name: "Ausentismo por causa médica",
+                target: 3.0,
+                comparator: "≤",
+                values: [4.8, 4.7, 4.9, 4.5, 4.2, 4.0, 3.8, 3.5, 3.3, 3.1, 2.9, 2.8],
+                periods: sgsstMonths,
+                frequency: "Mensual",
+                direction: "max",
+                color: "#FB7185"
+            },
+            {
+                name: "Cumplimiento del plan de capacitación",
+                target: 90,
+                comparator: "≥",
+                values: [72, 84, 91, 95],
+                periods: ["T1", "T2", "T3", "T4"],
+                frequency: "Trimestral",
+                direction: "min",
+                color: "#0D9488"
+            },
+            {
+                name: "Simulacros realizados",
+                target: 90,
+                comparator: "≥",
+                values: [80, 100],
+                periods: ["S1", "S2"],
+                frequency: "Semestral",
+                direction: "min",
+                color: "#0D9488"
+            },
+            {
+                name: "Peligros intervenidos",
+                target: 90,
+                comparator: "≥",
+                values: [55, 70, 85, 92],
+                periods: ["T1", "T2", "T3", "T4"],
+                frequency: "Trimestral",
+                direction: "min",
+                color: "#0D9488"
+            }
+        ];
+        var sgsstCharts = {};
+
+        function formatSgsstValue(value) {
+            return Number(value).toLocaleString("es-CO", { maximumFractionDigits: 1 });
+        }
+
+        function getSgsstStatus(metric, value) {
+            var met = metric.direction === "max" ? value <= metric.target : value >= metric.target;
+            if (met) {
+                return { className: "is-met", label: "Cumple la meta" };
+            }
+
+            var gap = metric.direction === "max"
+                ? (value - metric.target) / metric.target
+                : (metric.target - value) / metric.target;
+            return gap <= 0.1
+                ? { className: "is-near", label: "Cerca de la meta" }
+                : { className: "is-missed", label: "No cumple la meta" };
+        }
+
+        function renderSgsstKpis() {
+            var grid = document.getElementById("sgsstKpiGrid");
+            if (!grid) {
+                return;
+            }
+
+            sgsstMetrics.forEach(function (metric) {
+                var latest = metric.values[metric.values.length - 1];
+                var status = getSgsstStatus(metric, latest);
+                var card = document.createElement("article");
+                card.className = "sgsst-kpi-card " + status.className;
+
+                var label = document.createElement("div");
+                label.className = "sgsst-kpi-label";
+                label.textContent = metric.name;
+
+                var value = document.createElement("div");
+                value.className = "sgsst-kpi-value";
+                value.textContent = formatSgsstValue(latest) + "%";
+
+                var meta = document.createElement("div");
+                meta.className = "sgsst-kpi-meta";
+                meta.textContent = "Meta: " + metric.comparator + " " + formatSgsstValue(metric.target) + "%";
+
+                var period = document.createElement("div");
+                period.className = "sgsst-kpi-period";
+                period.textContent = "Último periodo: " + metric.periods[metric.periods.length - 1];
+
+                var statusLabel = document.createElement("span");
+                statusLabel.className = "sgsst-kpi-status";
+                statusLabel.textContent = status.label;
+
+                card.append(label, value, meta, period, statusLabel);
+                grid.appendChild(card);
+            });
+        }
+
+        function appendSgsstDataRow(tableBody, metric, period, value) {
+            var row = document.createElement("tr");
+            var cells = [
+                metric.name,
+                period,
+                formatSgsstValue(value) + "%",
+                metric.comparator + " " + formatSgsstValue(metric.target) + "%"
+            ];
+            cells.forEach(function (cellText) {
+                var cell = document.createElement("td");
+                cell.textContent = cellText;
+                row.appendChild(cell);
+            });
+            tableBody.appendChild(row);
+        }
+
+        function renderSgsstDataTable() {
+            var tableBody = document.getElementById("sgsstSimulationData");
+            if (!tableBody) {
+                return;
+            }
+
+            sgsstMetrics.forEach(function (metric) {
+                metric.values.forEach(function (value, index) {
+                    appendSgsstDataRow(tableBody, metric, metric.periods[index], value);
+                });
+            });
+        }
+
+        function sgsstTooltipLabel(context) {
+            var value = context.parsed.y;
+            if (value === null || typeof value === "undefined") {
+                return "";
+            }
+            if (context.dataset.isGoal) {
+                return "Meta: " + context.dataset.goalLabel;
+            }
+            return context.dataset.label + ": " + formatSgsstValue(value) + "% · Meta: " + context.dataset.goalLabel;
+        }
+
+        var emergencyStartMarker = {
+            id: "sgsstEmergencyStartMarker",
+            afterDraw: function (chart) {
+                var chartArea = chart.chartArea;
+                var xScale = chart.scales.x;
+                if (!chartArea || !xScale || chart.data.labels.length < 4) {
+                    return;
+                }
+
+                var markerX = xScale.getPixelForValue(3);
+                var context = chart.ctx;
+                var lines = ["Inicio del programa de controles", "de emergencia"];
+                var boxWidth = Math.min(232, chartArea.right - chartArea.left - 8);
+                var boxHeight = 32;
+                var boxX = Math.max(
+                    chartArea.left + 4,
+                    Math.min(markerX - boxWidth / 2, chartArea.right - boxWidth - 4)
+                );
+                var boxY = chartArea.top + 5;
+
+                context.save();
+                context.strokeStyle = "#FB7185";
+                context.lineWidth = 1.5;
+                context.setLineDash([5, 4]);
+                context.beginPath();
+                context.moveTo(markerX, chartArea.top);
+                context.lineTo(markerX, chartArea.bottom);
+                context.stroke();
+                context.setLineDash([]);
+
+                context.fillStyle = "rgba(255,255,255,0.94)";
+                context.fillRect(boxX, boxY, boxWidth, boxHeight);
+                context.strokeStyle = "#FB7185";
+                context.lineWidth = 1;
+                context.strokeRect(boxX, boxY, boxWidth, boxHeight);
+                context.fillStyle = "#9f354a";
+                context.font = "9px sans-serif";
+                context.textAlign = "center";
+                context.textBaseline = "middle";
+                context.fillText(lines[0], boxX + boxWidth / 2, boxY + 11, boxWidth - 8);
+                context.fillText(lines[1], boxX + boxWidth / 2, boxY + 23, boxWidth - 8);
+                context.restore();
+            }
+        };
+
+        function createSgsstLineChart(canvasId, metric, suggestedMax) {
+            var goalLabel = metric.comparator + " " + formatSgsstValue(metric.target) + "%";
+            var chart = new Chart(document.getElementById(canvasId), {
+                type: "line",
+                data: {
+                    labels: sgsstMonths,
+                    datasets: [
+                        {
+                            label: metric.name,
+                            data: metric.values,
+                            borderColor: metric.color,
+                            backgroundColor: metric.color,
+                            borderWidth: 2.5,
+                            pointRadius: 3,
+                            pointHoverRadius: 5,
+                            tension: 0.28,
+                            goalLabel: goalLabel
+                        },
+                        {
+                            label: "Meta " + goalLabel,
+                            data: sgsstMonths.map(function () { return metric.target; }),
+                            borderColor: "#6B7280",
+                            borderWidth: 1.5,
+                            borderDash: [6, 5],
+                            pointRadius: 0,
+                            tension: 0,
+                            isGoal: true,
+                            goalLabel: goalLabel
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: "index", intersect: false },
+                    plugins: {
+                        legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } },
+                        tooltip: {
+                            callbacks: {
+                                label: sgsstTooltipLabel,
+                                afterBody: function () { return "Inicio del programa: abril"; }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: "Mes" },
+                            grid: { display: false }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            suggestedMax: suggestedMax,
+                            title: { display: true, text: "Porcentaje (%)" },
+                            ticks: { callback: function (value) { return formatSgsstValue(value) + "%"; } }
+                        }
+                    }
+                },
+                plugins: [emergencyStartMarker]
+            });
+            sgsstCharts[canvasId] = chart;
+        }
+
+        function createSgsstComplianceChart() {
+            var labels = ["Capacitación", "Simulacros", "Peligros intervenidos"];
+            var periods = [
+                { label: "T1 / S1", values: [72, 80, 55], color: "rgba(13, 148, 136, 0.46)" },
+                { label: "T2", values: [84, null, 70], color: "rgba(13, 148, 136, 0.64)" },
+                { label: "T3 / S2", values: [91, 100, 85], color: "rgba(13, 148, 136, 0.82)" },
+                { label: "T4", values: [95, null, 92], color: "#0D9488" }
+            ];
+            var datasets = periods.map(function (period) {
+                return {
+                    label: period.label,
+                    data: period.values,
+                    backgroundColor: period.color,
+                    borderRadius: 5,
+                    maxBarThickness: 26,
+                    goalLabel: "≥ 90%"
+                };
+            });
+            datasets.push({
+                type: "line",
+                label: "Meta ≥ 90%",
+                data: labels.map(function () { return 90; }),
+                borderColor: "#6B7280",
+                borderWidth: 1.5,
+                borderDash: [6, 5],
+                pointRadius: 0,
+                isGoal: true,
+                goalLabel: "≥ 90%"
+            });
+
+            sgsstCharts.complianceChart = new Chart(document.getElementById("complianceChart"), {
+                type: "bar",
+                data: { labels: labels, datasets: datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: "index", intersect: false },
+                    plugins: {
+                        legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } },
+                        tooltip: { callbacks: { label: sgsstTooltipLabel } }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: "Indicador" },
+                            grid: { display: false }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            max: 110,
+                            title: { display: true, text: "Cumplimiento (%)" },
+                            ticks: { callback: function (value) { return value + "%"; } }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initializeSgsstCharts() {
+            var chartStatus = document.getElementById("sgsstChartStatus");
+            if (!document.getElementById("sgsstKpiGrid")) {
+                return;
+            }
+
+            renderSgsstKpis();
+            renderSgsstDataTable();
+
+            if (typeof Chart === "undefined") {
+                chartStatus.textContent = "No se pudo cargar Chart.js. Comprueba la conexión a internet y vuelve a cargar la página para ver las gráficas.";
+                chartStatus.hidden = false;
+                var downloadButtons = document.querySelectorAll(".sgsst-chart-download");
+                for (var i = 0; i < downloadButtons.length; i++) {
+                    downloadButtons[i].disabled = true;
+                }
+                return;
+            }
+
+            createSgsstLineChart("accidentChart", sgsstMetrics[0], 1.5);
+            createSgsstLineChart("absenceChart", sgsstMetrics[1], 5.5);
+            createSgsstComplianceChart();
+
+            var downloadButtons = document.querySelectorAll(".sgsst-chart-download");
+            for (var j = 0; j < downloadButtons.length; j++) {
+                downloadButtons[j].addEventListener("click", function () {
+                    var chart = sgsstCharts[this.getAttribute("data-chart")];
+                    if (!chart) {
+                        throw new Error("No se encontró la gráfica solicitada para exportar.");
+                    }
+                    var downloadLink = document.createElement("a");
+                    downloadLink.href = chart.toBase64Image("image/png", 1);
+                    downloadLink.download = this.getAttribute("data-filename");
+                    downloadLink.click();
+                });
+            }
+        }
+
+        initializeSgsstCharts();

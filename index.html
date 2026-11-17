@@ -186,10 +186,197 @@
             </div>
         </section>
     </div>
-    <section class="cut-empty-state" data-cut-content="3" hidden aria-live="polite">
-        <h2>Corte 3 · Evaluación y mejora</h2>
-        <p>Este corte todavía no tiene contenido en esta página.</p>
-    </section>
+    <div id="cut-content-3" class="cut-content" data-cut-content="3" hidden>
+        <section id="competencias-altos-mandos" class="section reveal">
+            <h2 class="section-title">Competencias de altos mandos</h2>
+            <p class="section-desc">El compromiso de CEO, COO y vicepresidencias debe traducirse en decisiones visibles y recursos concretos para proteger a las personas.</p>
+            <div class="sgsst-competency-grid">
+                <article class="sgsst-card"><span class="sgsst-card-number">01</span><div><h3>Liderazgo y compromiso visible</h3><p>Firmar y comunicar la política de SST; participar en revisiones y auditorías en planta.</p></div></article>
+                <article class="sgsst-card"><span class="sgsst-card-number">02</span><div><h3>Visión estratégica del riesgo</h3><p>Integrar la seguridad y salud en decisiones de diseño, manufactura y proveedores.</p></div></article>
+                <article class="sgsst-card"><span class="sgsst-card-number">03</span><div><h3>Asignación de recursos</h3><p>Garantizar presupuesto para brigadas, equipos de emergencia y capacitación.</p></div></article>
+                <article class="sgsst-card"><span class="sgsst-card-number">04</span><div><h3>Toma de decisiones bajo presión</h3><p>Detener la producción ante un incidente grave, como un incendio de baterías de litio.</p></div></article>
+                <article class="sgsst-card"><span class="sgsst-card-number">05</span><div><h3>Comunicación y rendición de cuentas</h3><p>Reportar indicadores de SST a la junta y exigir cumplimiento a proveedores como Foxconn.</p></div></article>
+                <article class="sgsst-card"><span class="sgsst-card-number">06</span><div><h3>Ética y cumplimiento normativo</h3><p>Asegurar que toda la cadena cumpla la normativa laboral y de seguridad de cada país.</p></div></article>
+                <article class="sgsst-card sgsst-card-wide"><span class="sgsst-card-number">07</span><div><h3>Gestión del cambio y mejora continua</h3><p>Aprender de cada incidente y ajustar los procesos para evitar que vuelva a ocurrir.</p></div></article>
+            </div>
+        </section>
+
+        <section id="sgsst-phva" class="section sgsst-dark-section reveal">
+            <h2 class="section-title">SGSST aplicado al ciclo PHVA</h2>
+            <p class="section-desc">Un ciclo continuo para anticipar peligros, aplicar controles, evaluar resultados y fortalecer el sistema.</p>
+            <div class="sgsst-phva-grid">
+                <article class="sgsst-phva-card"><div class="sgsst-phva-top"><span class="sgsst-phase">P</span><span class="sgsst-phase-name">01 · PLANEAR</span></div><h3>Definir el rumbo</h3><p>Política de SST, identificación de peligros y objetivos anuales.</p><ul><li>Químicos del anodizado y solventes</li><li>Baterías de litio, ruido y maquinaria CNC</li><li>Ergonomía y riesgo psicosocial</li></ul></article>
+                <article class="sgsst-phva-card"><div class="sgsst-phva-top"><span class="sgsst-phase">H</span><span class="sgsst-phase-name">02 · HACER</span></div><h3>Ejecutar controles</h3><p>Capacitación, COPASST, brigadas de emergencia y exámenes médicos ocupacionales.</p><ul><li>Controles sobre peligros priorizados</li><li>Formación y preparación del personal</li></ul></article>
+                <article class="sgsst-phva-card"><div class="sgsst-phva-top"><span class="sgsst-phase">V</span><span class="sgsst-phase-name">03 · VERIFICAR</span></div><h3>Medir el desempeño</h3><p>Comprobar que las acciones funcionen mediante:</p><ul><li>Indicadores de SST</li><li>Inspecciones y auditorías internas</li><li>Simulacros</li></ul></article>
+                <article class="sgsst-phva-card"><div class="sgsst-phva-top"><span class="sgsst-phase">A</span><span class="sgsst-phase-name">04 · ACTUAR</span></div><h3>Mejorar el sistema</h3><p>Implementar acciones correctivas y preventivas, y realizar la revisión anual por la alta dirección.</p><div class="sgsst-mini-note">La mejora continua vuelve a alimentar la planificación.</div></article>
+            </div>
+        </section>
+
+        <section id="seguimiento-medicion" class="section reveal">
+            <h2 class="section-title">Seguimiento y medición</h2>
+            <p class="section-desc">Escenario de una planta hipotética de ensamblaje de iPhone con 1.000 trabajadores. En abril se implementa el programa de controles de emergencia: simulacros, brigadas, extinción en áreas de baterías de litio y kits de contención de derrames.</p>
+            <p class="sgsst-simulation-alert" role="note">Datos hipotéticos con fines ilustrativos</p>
+            <p class="sgsst-chart-status" id="sgsstChartStatus" role="status" hidden></p>
+
+            <div class="sgsst-kpi-grid" id="sgsstKpiGrid" aria-live="polite"></div>
+
+            <div class="sgsst-chart-grid">
+                <figure class="sgsst-chart-card">
+                    <figcaption><h3>Frecuencia de accidentalidad</h3><p>Accidentes del mes por cada 100 trabajadores · meta ≤ 0,5 %</p></figcaption>
+                    <div class="sgsst-chart-container"><canvas id="accidentChart" role="img" aria-label="Gráfica mensual de frecuencia de accidentalidad, de enero a diciembre"></canvas></div>
+                    <button class="sgsst-chart-download" type="button" data-chart="accidentChart" data-filename="frecuencia-accidentalidad.png">Descargar gráfica como PNG</button>
+                </figure>
+
+                <figure class="sgsst-chart-card">
+                    <figcaption><h3>Ausentismo por causa médica</h3><p>Porcentaje mensual · meta ≤ 3,0 %</p></figcaption>
+                    <div class="sgsst-chart-container"><canvas id="absenceChart" role="img" aria-label="Gráfica mensual de ausentismo por causa médica, de enero a diciembre"></canvas></div>
+                    <button class="sgsst-chart-download" type="button" data-chart="absenceChart" data-filename="ausentismo-medico.png">Descargar gráfica como PNG</button>
+                </figure>
+
+                <figure class="sgsst-chart-card sgsst-chart-wide">
+                    <figcaption><h3>Indicadores de cumplimiento</h3><p>Resultados trimestrales y semestrales · meta ≥ 90 %</p></figcaption>
+                    <div class="sgsst-chart-container"><canvas id="complianceChart" role="img" aria-label="Gráfica agrupada de cumplimiento de capacitación, simulacros y peligros intervenidos"></canvas></div>
+                    <button class="sgsst-chart-download" type="button" data-chart="complianceChart" data-filename="indicadores-cumplimiento.png">Descargar gráfica como PNG</button>
+                </figure>
+            </div>
+
+            <div class="sgsst-interpretation">
+                <h3>Interpretación</h3>
+                <ul>
+                    <li>La accidentalidad baja de 1,2 % a 0,4 % y alcanza la meta en octubre.</li>
+                    <li>El ausentismo por causa médica alcanza la meta en noviembre.</li>
+                    <li>Los tres indicadores de cumplimiento superan el 90 % hacia el tercer o cuarto trimestre.</li>
+                </ul>
+            </div>
+
+            <h3 class="sgsst-data-heading">Definición de los indicadores</h3>
+            <div class="sgsst-table-wrap">
+                <table class="sgsst-indicator-table">
+                    <thead><tr><th>Indicador</th><th>Fórmula</th><th>Frecuencia</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Frecuencia de accidentalidad</strong></td><td>(Accidentes de trabajo del mes / trabajadores del mes) × 100</td><td><span class="sgsst-frequency">Mensual</span></td></tr>
+                        <tr><td><strong>Severidad de accidentalidad</strong></td><td>(Días de incapacidad + días cargados / trabajadores del mes) × 100</td><td><span class="sgsst-frequency">Mensual</span></td></tr>
+                        <tr><td><strong>Ausentismo por causa médica</strong></td><td>(Días de ausencia por incapacidad / días de trabajo programados) × 100</td><td><span class="sgsst-frequency">Mensual</span></td></tr>
+                        <tr><td><strong>Cumplimiento del plan de capacitación</strong></td><td>(Capacitaciones ejecutadas / programadas) × 100</td><td><span class="sgsst-frequency sgsst-frequency-quarterly">Trimestral</span></td></tr>
+                        <tr><td><strong>Simulacros realizados</strong></td><td>(Simulacros ejecutados / programados) × 100</td><td><span class="sgsst-frequency sgsst-frequency-semi">Semestral</span></td></tr>
+                        <tr><td><strong>Peligros intervenidos</strong></td><td>(Peligros con control implementado / peligros priorizados) × 100</td><td><span class="sgsst-frequency sgsst-frequency-quarterly">Trimestral</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="sgsst-data-heading">Datos mensuales y periódicos</h3>
+            <div class="sgsst-table-wrap sgsst-simulation-table-wrap" role="region" aria-label="Tabla de todos los resultados simulados" tabindex="0">
+                <table class="sgsst-indicator-table sgsst-simulation-table">
+                    <thead><tr><th>Indicador</th><th>Periodo</th><th>Resultado</th><th>Meta</th></tr></thead>
+                    <tbody id="sgsstSimulationData"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="emergencias-desastres" class="section reveal">
+            <h2 class="section-title">Emergencias por desastres naturales en apple</h2>
+            <p class="section-desc">Material visual de apoyo para la preparación y respuesta ante emergencias.</p>
+            <div class="sgsst-emergency-gallery">
+                <figure class="image-placeholder"><img src="resources/emergencias1.jpeg" alt="Material de emergencia 1" loading="lazy"><figcaption>Emergencias · 1</figcaption></figure>
+                <figure class="image-placeholder"><img src="resources/emergencias2.jpeg" alt="Material de emergencia 2" loading="lazy"><figcaption>Emergencias · 2</figcaption></figure>
+                <figure class="image-placeholder"><img src="resources/emergencias3.jpeg" alt="Material de emergencia 3" loading="lazy"><figcaption>Emergencias · 3</figcaption></figure>
+                <figure class="image-placeholder"><img src="resources/emergencias4.jpeg" alt="Material de emergencia 4" loading="lazy"><figcaption>Emergencias · 4</figcaption></figure>
+            </div>
+        </section>
+
+        <section id="control-operacional" class="section reveal">
+            <h2 class="section-title">Control operacional</h2>
+            <p class="section-desc">Controles definidos para los procesos estratégicos, misionales y de soporte. La tabla incluye los 33 registros del archivo fuente.</p>
+            <p class="control-workbook-link"><a href="resources/Control%20op%20fin.xlsx" download>Descargar archivo Excel · Control op fin.xlsx</a></p>
+            <div class="control-table-wrap" role="region" aria-label="Tabla de controles operacionales; desplazamiento horizontal disponible" tabindex="0">
+                <table class="control-table">
+                    <thead><tr><th>N.º</th><th>Nivel</th><th>Proceso</th><th>Descripción</th><th>Tipo</th><th>Control operacional</th><th>Evidencia</th><th>Norma y numeral</th><th>Responsable</th><th>Frecuencia</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Estratégico</td><td>Planeación estratégica</td><td>Visión y hoja de ruta</td><td>Calidad</td><td>Revisión trimestral de la hoja de ruta por el comité directivo, con objetivos e indicadores aprobados antes de ejecutar</td><td>Acta de comité firmada</td><td>ISO 9001:2015 – 8.1</td><td>Dirección general</td><td>Trimestral</td></tr>
+                        <tr><td>2</td><td>Estratégico</td><td>Planeación estratégica</td><td>Visión y hoja de ruta</td><td>Seguridad de la información</td><td>Clasificación de documentos estratégicos como confidenciales y acceso restringido por rol con MFA</td><td>Matriz de accesos y bitácora</td><td>ISO/IEC 27001:2022 – 8.1</td><td>CISO</td><td>Semestral</td></tr>
+                        <tr><td>3</td><td>Estratégico</td><td>Planeación estratégica</td><td>Visión y hoja de ruta</td><td>Ambiental</td><td>Metas ambientales incluidas en la hoja de ruta con responsable y presupuesto asignado</td><td>Plan estratégico con metas ambientales</td><td>ISO 14001:2015 – 8.1</td><td>Dirección de sostenibilidad</td><td>Anual</td></tr>
+                        <tr><td>4</td><td>Estratégico</td><td>Innovación y desarrollo</td><td>Chips M y Apple Intelligence</td><td>Calidad</td><td>Revisión por fases (stage-gate): requisitos, pruebas y aprobación antes de pasar a la siguiente fase</td><td>Acta de cierre de fase firmada</td><td>ISO 9001:2015 – 8.1</td><td>Líder de I+D</td><td>Por fase</td></tr>
+                        <tr><td>5</td><td>Estratégico</td><td>Innovación y desarrollo</td><td>Chips M y Apple Intelligence</td><td>Seguridad de la información</td><td>Protección de propiedad intelectual: repos por rol con MFA, ninguna credencial en el código y acuerdos de confidencialidad</td><td>Pull request aprobado y bitácora de accesos</td><td>ISO/IEC 27001:2022 – 8.1</td><td>Líder de I+D / CISO</td><td>Continuo</td></tr>
+                        <tr><td>6</td><td>Estratégico</td><td>Innovación y desarrollo</td><td>Chips M y Apple Intelligence</td><td>SST</td><td>Inspección de laboratorios de prueba y uso obligatorio de EPP y protección ergonómica</td><td>Lista de inspección y registro de entrega de EPP</td><td>ISO 45001:2018 – 8.1</td><td>Coordinador SST</td><td>Mensual</td></tr>
+                        <tr><td>7</td><td>Estratégico</td><td>Marca y ecosistema</td><td>Identidad y experiencia</td><td>Calidad</td><td>Aprobación de piezas de marca contra la guía de identidad antes de publicar</td><td>Registro de aprobación de piezas</td><td>ISO 9001:2015 – 8.1</td><td>Dirección de marca</td><td>Por pieza</td></tr>
+                        <tr><td>8</td><td>Estratégico</td><td>Marca y ecosistema</td><td>Identidad y experiencia</td><td>Seguridad de la información</td><td>Consentimiento verificable del usuario y minimización de datos en campañas y servicios del ecosistema</td><td>Registro de consentimientos</td><td>ISO/IEC 27001:2022 – 8.1</td><td>Oficial de privacidad</td><td>Por campaña</td></tr>
+                        <tr><td>9</td><td>Estratégico</td><td>Marca y ecosistema</td><td>Identidad y experiencia</td><td>Ambiental</td><td>Validación previa de toda declaración ambiental con evidencia técnica</td><td>Dossier de sustento de declaración</td><td>ISO 14001:2015 – 8.1</td><td>Sostenibilidad / Legal</td><td>Por declaración</td></tr>
+                        <tr><td>10</td><td>Misional</td><td>Diseño de producto</td><td>Hardware y software</td><td>Calidad</td><td>Verificación y validación del diseño con pruebas documentadas y aceptación antes de liberar a producción</td><td>Informe de validación firmado</td><td>ISO 9001:2015 – 8.1</td><td>Líder de diseño</td><td>Por versión</td></tr>
+                        <tr><td>11</td><td>Misional</td><td>Diseño de producto</td><td>Hardware y software</td><td>Ambiental</td><td>Ecodiseño: análisis de ciclo de vida y porcentaje mínimo de materiales reciclados definido en la especificación</td><td>Reporte de ciclo de vida del producto</td><td>ISO 14001:2015 – 8.1</td><td>Ingeniería de producto</td><td>Por producto</td></tr>
+                        <tr><td>12</td><td>Misional</td><td>Diseño de producto</td><td>Hardware y software</td><td>Seguridad de la información</td><td>Control de versiones de planos y código, con acceso por rol y trazabilidad de cambios</td><td>Historial de versiones y bitácora de accesos</td><td>ISO/IEC 27001:2022 – 8.1</td><td>PMO de producto</td><td>Continuo</td></tr>
+                        <tr><td>13</td><td>Misional</td><td>Manufactura</td><td>Producción y logística</td><td>SST</td><td>Permiso de trabajo y bloqueo/etiquetado (LOTO) en intervención de máquinas, con EPP según matriz de riesgos</td><td>Permiso firmado y registro LOTO</td><td>ISO 45001:2018 – 8.1</td><td>Jefe de planta</td><td>Por intervención</td></tr>
+                        <tr><td>14</td><td>Misional</td><td>Manufactura</td><td>Producción y logística</td><td>Ambiental</td><td>Segregación, registro y disposición de residuos con gestores autorizados; medición de emisiones y consumo de energía</td><td>Manifiestos de residuos y reporte mensual de consumo</td><td>ISO 14001:2015 – 8.1</td><td>Gestor ambiental</td><td>Mensual</td></tr>
+                        <tr><td>15</td><td>Misional</td><td>Manufactura</td><td>Producción y logística</td><td>Calidad</td><td>Inspección en línea con muestreo y liberación de lote solo con resultados conformes</td><td>Registro de inspección y certificado de lote</td><td>ISO 9001:2015 – 8.1</td><td>Control de calidad</td><td>Por lote</td></tr>
+                        <tr><td>16</td><td>Misional</td><td>Marketing y ventas</td><td>Apple Store y online</td><td>Calidad</td><td>Verificación de precios, garantías e información al cliente antes de publicar o vender</td><td>Lista de verificación de oferta</td><td>ISO 9001:2015 – 8.1</td><td>Gerente comercial</td><td>Por oferta</td></tr>
+                        <tr><td>17</td><td>Misional</td><td>Marketing y ventas</td><td>Apple Store y online</td><td>Seguridad de la información</td><td>Cifrado de datos de pago y de clientes; acceso a datos solo por rol</td><td>Reporte de cifrado y revisión de accesos</td><td>ISO/IEC 27001:2022 – 8.1</td><td>TI comercial</td><td>Trimestral</td></tr>
+                        <tr><td>18</td><td>Misional</td><td>Marketing y ventas</td><td>Apple Store y online</td><td>SST</td><td>Control de aforo, rutas de evacuación señalizadas y simulacro en tiendas</td><td>Registro de simulacro e inspección de tienda</td><td>ISO 45001:2018 – 8.1</td><td>Gerente de tienda</td><td>Semestral</td></tr>
+                        <tr><td>19</td><td>Misional</td><td>Servicio al cliente</td><td>AppleCare y soporte</td><td>Calidad</td><td>Atención con tiempos de respuesta definidos (SLA) y encuesta de satisfacción por caso cerrado</td><td>Reporte de SLA y resultados de encuesta</td><td>ISO 9001:2015 – 8.1</td><td>Líder de soporte</td><td>Mensual</td></tr>
+                        <tr><td>20</td><td>Misional</td><td>Servicio al cliente</td><td>AppleCare y soporte</td><td>Seguridad de la información</td><td>Verificación de identidad del cliente antes de acceder o modificar su cuenta</td><td>Guion de verificación y auditoría de llamadas</td><td>ISO/IEC 27001:2022 – 8.1</td><td>Líder de soporte</td><td>Continuo</td></tr>
+                        <tr><td>21</td><td>Misional</td><td>Servicio al cliente</td><td>AppleCare y soporte</td><td>Ambiental</td><td>Recolección y reciclaje de equipos devueltos con gestor autorizado</td><td>Certificado de disposición final</td><td>ISO 14001:2015 – 8.1</td><td>Logística inversa</td><td>Mensual</td></tr>
+                        <tr><td>22</td><td>Soporte</td><td>Talento humano</td><td>Reclutamiento</td><td>SST</td><td>Examen médico de ingreso e inducción en SST antes de iniciar labores</td><td>Certificado médico y registro de inducción</td><td>ISO 45001:2018 – 8.1</td><td>Gestión humana / SST</td><td>Por ingreso</td></tr>
+                        <tr><td>23</td><td>Soporte</td><td>Talento humano</td><td>Reclutamiento</td><td>Calidad</td><td>Definición de perfiles de cargo y verificación de competencias antes de contratar</td><td>Perfil aprobado y evaluación de competencias</td><td>ISO 9001:2015 – 8.1</td><td>Gestión humana</td><td>Por vacante</td></tr>
+                        <tr><td>24</td><td>Soporte</td><td>Talento humano</td><td>Reclutamiento</td><td>Seguridad de la información</td><td>Verificación de antecedentes, acuerdo de confidencialidad y retiro de accesos al terminar el contrato</td><td>Acuerdo firmado y acta de retiro de accesos</td><td>ISO/IEC 27001:2022 – 8.1</td><td>Gestión humana / TI</td><td>Por ingreso y retiro</td></tr>
+                        <tr><td>25</td><td>Soporte</td><td>TI y sistemas</td><td>Infraestructura</td><td>Seguridad de la información</td><td>Gestión de cambios aprobada, parches aplicados y copias de respaldo con prueba de restauración</td><td>Ticket de cambio y reporte de restauración</td><td>ISO/IEC 27001:2022 – 8.1</td><td>Líder de TI</td><td>Mensual</td></tr>
+                        <tr><td>26</td><td>Soporte</td><td>TI y sistemas</td><td>Infraestructura</td><td>Ambiental</td><td>Eficiencia energética del centro de datos y disposición de residuos electrónicos (RAEE) con gestor autorizado</td><td>Reporte de consumo y certificado RAEE</td><td>ISO 14001:2015 – 8.1</td><td>Líder de infraestructura</td><td>Mensual</td></tr>
+                        <tr><td>27</td><td>Soporte</td><td>TI y sistemas</td><td>Infraestructura</td><td>Calidad</td><td>Gestión de incidentes con clasificación, SLA y cierre verificado</td><td>Reporte de incidentes y SLA</td><td>ISO 9001:2015 – 8.1</td><td>Mesa de ayuda</td><td>Mensual</td></tr>
+                        <tr><td>28</td><td>Soporte</td><td>Finanzas</td><td>Presupuesto</td><td>Calidad</td><td>Conciliaciones y doble aprobación de pagos y ajustes presupuestales</td><td>Conciliación firmada</td><td>ISO 9001:2015 – 8.1</td><td>Director financiero</td><td>Mensual</td></tr>
+                        <tr><td>29</td><td>Soporte</td><td>Finanzas</td><td>Presupuesto</td><td>Seguridad de la información</td><td>Segregación de funciones en sistemas financieros y revisión periódica de accesos</td><td>Matriz de segregación y revisión de accesos</td><td>ISO/IEC 27001:2022 – 8.1</td><td>Director financiero / CISO</td><td>Trimestral</td></tr>
+                        <tr><td>30</td><td>Soporte</td><td>Finanzas</td><td>Presupuesto</td><td>SST</td><td>Presupuesto asignado y ejecución seguida del plan anual de SST</td><td>Informe de ejecución presupuestal SST</td><td>ISO 45001:2018 – 8.1</td><td>Director financiero</td><td>Trimestral</td></tr>
+                        <tr><td>31</td><td>Soporte</td><td>Legal y cumplimiento</td><td>Privacidad y normas</td><td>Seguridad de la información</td><td>Registro de tratamiento de datos personales y evaluación de impacto de privacidad en nuevos proyectos</td><td>Registro de tratamiento y evaluación firmada</td><td>ISO/IEC 27001:2022 – 8.1</td><td>Oficial de privacidad</td><td>Por proyecto</td></tr>
+                        <tr><td>32</td><td>Soporte</td><td>Legal y cumplimiento</td><td>Privacidad y normas</td><td>Ambiental</td><td>Matriz de requisitos legales ambientales actualizada y evaluación de cumplimiento</td><td>Matriz legal y reporte de cumplimiento</td><td>ISO 14001:2015 – 8.1</td><td>Asesor legal</td><td>Semestral</td></tr>
+                        <tr><td>33</td><td>Soporte</td><td>Legal y cumplimiento</td><td>Privacidad y normas</td><td>SST</td><td>Matriz de requisitos legales de SST actualizada y evaluación de cumplimiento</td><td>Matriz legal SST y reporte de cumplimiento</td><td>ISO 45001:2018 – 8.1</td><td>Asesor legal / SST</td><td>Semestral</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="controles-emergencia-proceso" class="section reveal">
+            <h2 class="section-title">Tres controles de emergencia por proceso</h2>
+            <p class="section-desc">Controles clave por área para reducir la probabilidad de incidentes y responder de forma organizada.</p>
+            <div class="sgsst-process-list">
+                <article class="sgsst-process-card">
+                    <div class="sgsst-process-title"><span class="sgsst-process-index">01</span><h3>Innovación y desarrollo</h3></div>
+                    <ol>
+                        <li>Detección y extinción de incendios en laboratorios de prueba de baterías.</li>
+                        <li>Lavaojos, ducha de emergencia y kits de derrames para químicos.</li>
+                        <li>Botón de parada de emergencia y corte de energía de equipos de prueba.</li>
+                    </ol>
+                </article>
+                <article class="sgsst-process-card">
+                    <div class="sgsst-process-title"><span class="sgsst-process-index">02</span><h3>Diseño de producto</h3></div>
+                    <ol>
+                        <li>Rutas de evacuación señalizadas, puntos de encuentro y simulacros periódicos.</li>
+                        <li>Brigada de primeros auxilios con botiquines y desfibrilador (DEA).</li>
+                        <li>Gabinetes ignífugos para almacenar prototipos con baterías de litio.</li>
+                    </ol>
+                </article>
+                <article class="sgsst-process-card">
+                    <div class="sgsst-process-title"><span class="sgsst-process-index">03</span><h3>Manufactura</h3></div>
+                    <ol>
+                        <li>Rociadores y detección temprana en áreas de baterías, con zona de cuarentena para las defectuosas.</li>
+                        <li>Paradas de emergencia en maquinaria CNC y brigada de evacuación para líneas con alta ocupación.</li>
+                        <li>Plan de contención de derrames en anodizado y solventes, con hojas de seguridad (SDS) a la vista.</li>
+                    </ol>
+                </article>
+                <article class="sgsst-process-card">
+                    <div class="sgsst-process-title"><span class="sgsst-process-index">04</span><h3>Servicio al cliente</h3></div>
+                    <ol>
+                        <li>Contenedor ignífugo para baterías hinchadas o sobrecalentadas en tienda.</li>
+                        <li>Plan de evacuación de clientes y empleados, con personal entrenado para guiarlos.</li>
+                        <li>Protocolo ante agresiones o incidentes de seguridad, con primeros auxilios y DEA.</li>
+                    </ol>
+                </article>
+                <article class="sgsst-process-card">
+                    <div class="sgsst-process-title"><span class="sgsst-process-index">05</span><h3>Legal y cumplimiento</h3></div>
+                    <ol>
+                        <li>Plan de evacuación y simulacros de incendio y sismo en oficinas.</li>
+                        <li>Plan de continuidad del negocio y comunicación de crisis.</li>
+                        <li>Protocolo de reporte e investigación de incidentes ante la autoridad competente.</li>
+                    </ol>
+                </article>
+            </div>
+        </section>
+    </div>
 
     <footer>
         <p>Diseñado para fines académicos/informativos. No afiliado a Apple Inc.</p>
@@ -202,6 +389,7 @@
     </div>
 
     <!-- Script para las animaciones dinámicas al hacer scroll -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
